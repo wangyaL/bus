@@ -17,6 +17,7 @@ public class CityActivity extends Activity {
 //	private TextView city_text;
 	private Button btn_to_way;
 	private TextView hello_text;
+	private TextView hello_text_title;
 	private String helloWorld;
 
 	@Override
@@ -26,6 +27,7 @@ public class CityActivity extends Activity {
 		
 //		city_text = (TextView) findViewById(R.id.city_text);
 		hello_text = (TextView) findViewById(R.id.hello_world);
+		hello_text_title = (TextView) findViewById(R.id.hello_world_title);
 		btn_to_way = (Button) findViewById(R.id.btn_to_way);
 		
 		MyCount myCount = (MyCount) getApplication();
@@ -39,6 +41,9 @@ public class CityActivity extends Activity {
 				startActivity(new Intent(CityActivity.this, WayActivity.class));
 			}
 		});
+		
+		String str = myCount.getHelloWorld().substring(5, 12);
+		hello_text_title.setText(str);
 	}
 
 	@Override

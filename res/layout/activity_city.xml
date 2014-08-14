@@ -32,12 +32,24 @@
          />
 
     <TextView
-        android:id="@+id/hello_world"
+        android:id="@+id/hello_world_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="65dp"
+        android:text="公交一览"
+        android:textColor="#333333"
+        android:textSize="18sp"
+         />
+    
+    <TextView
+        android:id="@+id/hello_world"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="105dp"
         android:text="@string/hello_world"
         android:textColor="#333333"
         android:textSize="18sp"

@@ -61,7 +61,7 @@ public class WayActivity extends Activity {
 		
 		for (int i=0; i<titles.length; i++) {
 			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("title", titles[i].replace("night", "夜班车")+"路");
+			map.put("title", titles[i].replace("night", "夜班车").replace("gaof", "高峰大战车")+"路");
 			
 			map.put("content", StringUtil.iso2Utf8((String) pro.get(titles[i]+"_content_"+state)));
 			map.put("time", StringUtil.iso2Utf8((String) pro.get(titles[i]+"_time_"+state)));

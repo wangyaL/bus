@@ -62,9 +62,9 @@ public class DetailActivity extends Activity {
 		
 		wayNum = (String) getIntent.getSerializableExtra("wayNum");
 
-		way.setText(wayNum.replace("night", "夜班车")+"路");
+		way.setText(wayNum.replace("night", "夜班车").replace("gaof", "高峰大战车")+"路");
 		Properties p = PropertiesUtil.getProperties(getApplicationContext(), city+"_bus.properties");
-		time.setText((String) p.get(wayNum+"_time_"+state));
+		time.setText(StringUtil.iso2Utf8((String) p.get(wayNum+"_time_"+state)));
 		
 		mList = new ArrayList<Map<String,Object>>();
 		Properties pro = PropertiesUtil.getProperties(getApplicationContext(), city+"_detail.properties");
