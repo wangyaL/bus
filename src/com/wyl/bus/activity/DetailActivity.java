@@ -105,8 +105,9 @@ public class DetailActivity extends Activity {
 					myCount.setCity("hzs");
 					myCount.setHelloWorld("欢迎使用“杭州公交 一览”，点击下面的按钮查看公交列表");
 				}
-				startActivity(new Intent(DetailActivity.this, CityActivity.class));
-				finish();
+				Intent toTop = new Intent(getApplicationContext(), CityActivity.class);
+				toTop.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(toTop);
 				break;
 			case R.id.action_settings:
 				String state = myCount.getState();

@@ -64,7 +64,8 @@ public class WayActivity extends Activity {
 			map.put("title", titles[i].replace("night", "夜班车").replace("gaof", "高峰大战车")+"路");
 			
 			map.put("content", StringUtil.iso2Utf8((String) pro.get(titles[i]+"_content_"+state)));
-			map.put("time", StringUtil.iso2Utf8((String) pro.get(titles[i]+"_time_"+state)));
+			String time = StringUtil.iso2Utf8((String) pro.get(titles[i]+"_time_"+state));
+			map.put("time", (time.length()>15) ? "" : time);
 			
 			mList.add(map);
 		}
@@ -105,8 +106,9 @@ public class WayActivity extends Activity {
 					myCount.setCity("hzs");
 					myCount.setHelloWorld("欢迎使用“杭州公交 一览”，点击下面的按钮查看公交列表");
 				}
-				startActivity(new Intent(WayActivity.this, CityActivity.class));
-				finish();
+				Intent toTop = new Intent(getApplicationContext(), CityActivity.class);
+				toTop.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(toTop);
 				break;
 			case R.id.action_settings:
 				String state = myCount.getState();

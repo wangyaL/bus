@@ -3,8 +3,17 @@ package com.wyl.bus.util;
 import java.io.UnsupportedEncodingException;
 
 import android.util.Log;
-
+/**
+ * 字符串处理工具
+ * @author wyl
+ *
+ */
 public class StringUtil {
+	/**
+	 * 编码转换，ISO——>utf8
+	 * @param str 目标字符串
+	 * @return
+	 */
 	public static String iso2Utf8(String str){
 		String resultStr = "";
 		try {
