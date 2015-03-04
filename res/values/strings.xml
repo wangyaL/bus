@@ -9,5 +9,7 @@
     <string name="title_activity_detail">公交路线</string>
     <string name="determine">确定</string>
     <string name="confirmation">确认</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

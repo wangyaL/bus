@@ -15,7 +15,7 @@ import com.wyl.bus.common.MyCount;
 
 public class CityActivity extends Activity {
 //	private TextView city_text;
-	private Button btn_to_way;
+	private Button btn_to_way, btn;
 	private TextView hello_text;
 	private TextView hello_text_title;
 	private String helloWorld;
@@ -29,6 +29,7 @@ public class CityActivity extends Activity {
 		hello_text = (TextView) findViewById(R.id.hello_world);
 		hello_text_title = (TextView) findViewById(R.id.hello_world_title);
 		btn_to_way = (Button) findViewById(R.id.btn_to_way);
+		btn = (Button) findViewById(R.id.btn);
 		
 		MyCount myCount = (MyCount) getApplication();
 		helloWorld = myCount.getHelloWorld();
@@ -39,6 +40,13 @@ public class CityActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				startActivity(new Intent(CityActivity.this, WayActivity.class));
+			}
+		});
+		btn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(CityActivity.this, MainActivity.class));
 			}
 		});
 		

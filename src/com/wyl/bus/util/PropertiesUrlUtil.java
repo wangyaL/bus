@@ -45,7 +45,6 @@ public class PropertiesUrlUtil {
 			//测试是否能够打印出最新的，刚刚修改的url的值
 			//System.out.println("setProperty success: " + props.getProperty(param));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
