@@ -54,9 +54,25 @@
     
     <ShareSDK 
         AppKey = "5edaaec4b5ca"/> <!-- 修改成你在sharesdk后台注册的应用的appkey"-->
+    <QZone
+        Id="1"
+        SortId="1"
+        AppId="1102085422"
+        AppKey="5fBCifZig9zfyKQl"
+        ShareByAppClient="true"
+        Enable="true" />
+    <QQ
+        Id="2"
+        SortId="2"
+        AppId="1102085422"
+        AppKey="5fBCifZig9zfyKQl"
+        ShareByAppClient="true"
+        Enable="true" />
+        
+        
     
     <!-- ShareByAppClient标识是否使用微博客户端分享，默认是false -->
-    <SinaWeibo
+<!--     <SinaWeibo
         Id="1"
         SortId="1"
         AppKey="568898243"
@@ -71,16 +87,16 @@
         AppKey="801307650"
         AppSecret="ae36f4ee3946e1cbb98d6965b0b2ff5c"
         RedirectUri="http://sharesdk.cn"
-        Enable="true" />
+        Enable="true" /> -->
 
     <!-- ShareByAppClient标识是否使用微博客户端分享，默认是false -->
-    <QZone
+    <!-- <QZone
         Id="3"
         SortId="3"
-        AppId="100371282"
-        AppKey="aed9b0303e3ed1e27bae87c33761161d"
+        AppId="1102085422"
+        AppKey="5fBCifZig9zfyKQl"
         ShareByAppClient="true"
-        Enable="true" />
+        Enable="true" /> -->
     
     <!-- 
     	Wechat微信和WechatMoments微信朋友圈的appid是一样的；
@@ -94,7 +110,7 @@
 		审核的应用也可以执行分享，但是仅限于分享文字和图片，不能分享其他类型，
 		默认值为false。此外，微信收藏不支持此字段。
 	-->
-    <Wechat
+<!--     <Wechat
         Id="4"
         SortId="4"
         AppId="wx4868b35061f87885"
@@ -115,10 +131,10 @@
         SortId="6"
         AppId="wx4868b35061f87885"
         AppSecret="64020361b8ec4c99936c0e3999a9f249"
-        Enable="true" />
+        Enable="true" /> -->
     
 	<!-- ShareByAppClient标识是否使用微博客户端分享，默认是false -->
-	<QQ
+<!-- 	<QQ
         Id="7"
         SortId="7"
         AppId="1102085422"
@@ -191,7 +207,7 @@
         AppKey="e16680a815134504b746c86e08a19db0"
         AppSecret="b8eec53707c3976efc91614dd16ef81c"
         RedirectUri="http://sharesdk.cn"
-        Enable="true" />
+        Enable="true" /> -->
         
     <!-- 
     	在中国大陆，印象笔记有两个服务器，一个是沙箱（sandbox），一个是生产服务器（china）。
@@ -203,7 +219,7 @@
     	如果目标设备上已经安装了印象笔记客户端，ShareSDK允许应用调用本地API来完成分享，但
     	是需要将应用信息中的“ShareByAppClient”设置为true，此字段默认值为false。
     -->
-    <Evernote
+<!--     <Evernote
         Id="19"
         SortId="19"
         HostType="sandbox"
@@ -274,7 +290,7 @@
         ClientId="ff68e3216b4f4f989121aa1c2962d058"
 		ClientSecret="1b2e82f110264869b3505c3fe34e31a1"
 		RedirectUri="http://sharesdk.cn"
-        Enable="true" />
+        Enable="true" /> -->
     
     <!-- 
     	Yixin易信和YixinMoments易信朋友圈的appid是一样的；
@@ -288,7 +304,7 @@
 		审核的应用也可以执行分享，但是仅限于分享文字或图片，不能分享其他类型，
 		默认值为false。
 	-->
-	<Yixin 
+<!-- 	<Yixin 
     	Id="29"
         SortId="29"
         AppId="yx0d9a9f9088ea44d78680f3274da1765f"
@@ -354,6 +370,6 @@
         ConsumerKey="107704292745179"
         ConsumerSecret="38053202e1a5fe26c80c753071f0b573"
         RedirectUrl="http://mob.com"
-        Enable="true" />
+        Enable="true" /> -->
     
 </DevInfor>

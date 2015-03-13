@@ -1,5 +1,11 @@
 package com.wyl.bus.activity;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -8,7 +14,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Bitmap.CompressFormat;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,16 +34,22 @@ import cn.sharesdk.tencent.qzone.QZone;
 import cn.sharesdk.tencent.weibo.TencentWeibo;
 
 import com.wyl.bus.R;
+import com.wyl.bus.activity.image.HelpTopicImageBean;
+import com.wyl.bus.activity.image.PictureViewFra;
 import com.wyl.bus.common.MyCount;
 
 public class CityActivity extends Activity implements OnClickListener{
 //	private TextView city_text;
-	private Button btn_to_way, btn, btn_share, btn_share2;
+	private Button btn_to_way, btn, btn_share, btn_share2, btn_image, btn_img;
 	private TextView hello_text;
 	private TextView hello_text_title;
 	private String helloWorld;
 	
 	private boolean shareFromQQLogin = false;
+	
+	//sdcard中的图片名称
+	private static final String FILE_NAME = "/share_pic.jpg";
+	public static String TEST_IMAGE;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +63,8 @@ public class CityActivity extends Activity implements OnClickListener{
 		btn = (Button) findViewById(R.id.btn);
 		btn_share = (Button) findViewById(R.id.btn_share);
 		btn_share2 = (Button) findViewById(R.id.btn_share2);
+		btn_image = (Button) findViewById(R.id.btn_image);
+		btn_img = (Button) findViewById(R.id.btn_img);
 		
 		MyCount myCount = (MyCount) getApplication();
 		helloWorld = myCount.getHelloWorld();
@@ -58,9 +74,17 @@ public class CityActivity extends Activity implements OnClickListener{
 		btn.setOnClickListener(this);
 		btn_share.setOnClickListener(this);
 		btn_share2.setOnClickListener(this);
+		btn_image.setOnClickListener(this);
+		btn_img.setOnClickListener(this);
 		
 		String str = myCount.getHelloWorld().substring(5, 12);
 		hello_text_title.setText(str);
+		
+		new Thread() {
+			public void run() {
+				initImagePath();
+			}
+		}.start();
 	}
 	@Override
 	public void onClick(View v) {
@@ -79,43 +103,58 @@ public class CityActivity extends Activity implements OnClickListener{
 			// 图文分享
 			showShare(false, null, false);
 			break;
+		case R.id.btn_image:
+			startActivity(new Intent(CityActivity.this, DisplayImage.class));
+			break;
+		case R.id.btn_img:
+			Intent intent = new Intent(CityActivity.this, PictureViewFra.class);
+			HelpTopicImageBean bean1 = new HelpTopicImageBean("http://www.zhijianlife.com/picture/buyer/2014123010454095824.png", "第一个图");
+			HelpTopicImageBean bean2 = new HelpTopicImageBean("http://www.zhijianlife.com/picture/buyer/2015030720122815809.jpg", "第二个图");
+			List<HelpTopicImageBean> list = new ArrayList<HelpTopicImageBean>();
+			list.add(bean1);
+			list.add(bean2);
+			Bundle bundle = new Bundle();
+			bundle.putSerializable("helpTopicImage", (Serializable)list);
+			intent.putExtras(bundle);
+			startActivity(intent);
+			break;
 
 		default:
-			{
-				// 分享到具体的平台
-				Object tag = v.getTag();
-				if (tag != null) {
-					final String platformName = ((Platform) tag).getName();
-					//QQ,QZone授权登录后发微博
-					if(TencentWeibo.NAME.equals(platformName)){
-						new AlertDialog.Builder(getContext())
-						.setMessage(R.string.qq_share_way)
-						.setPositiveButton(R.string.qq_share_from_qqlogin, new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int which) {
-								shareFromQQLogin = true;
-								try
-								{
-									getContext().getPackageManager().getPackageInfo("com.qzone", 0);
-									showShare(false, QZone.NAME, false);
-								} catch (PackageManager.NameNotFoundException e)
-								{
-									showShare(false, QQ.NAME, false);
-								}
-							}
-						})
-						.setNegativeButton(R.string.qq_share_from_tlogin, new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int which) {
-								shareFromQQLogin = false;
-								showShare(false, platformName, false);
-							}
-						})
-						.setIcon(android.R.drawable.ic_dialog_alert)
-						.show();
-					}else{
-						showShare(false, platformName, false);
-					}
-				}
-			}
+//			{
+//				// 分享到具体的平台
+//				Object tag = v.getTag();
+//				if (tag != null) {
+//					final String platformName = ((Platform) tag).getName();
+//					//QQ,QZone授权登录后发微博
+//					if(TencentWeibo.NAME.equals(platformName)){
+//						new AlertDialog.Builder(getContext())
+//						.setMessage(R.string.qq_share_way)
+//						.setPositiveButton(R.string.qq_share_from_qqlogin, new DialogInterface.OnClickListener() {
+//							public void onClick(DialogInterface dialog, int which) {
+//								shareFromQQLogin = true;
+//								try
+//								{
+//									getContext().getPackageManager().getPackageInfo("com.qzone", 0);
+//									showShare(false, QZone.NAME, false);
+//								} catch (PackageManager.NameNotFoundException e)
+//								{
+//									showShare(false, QQ.NAME, false);
+//								}
+//							}
+//						})
+//						.setNegativeButton(R.string.qq_share_from_tlogin, new DialogInterface.OnClickListener() {
+//							public void onClick(DialogInterface dialog, int which) {
+//								shareFromQQLogin = false;
+//								showShare(false, platformName, false);
+//							}
+//						})
+//						.setIcon(android.R.drawable.ic_dialog_alert)
+//						.show();
+//					}else{
+//						showShare(false, platformName, false);
+//					}
+//				}
+//			}
 			break;
 		}
 	}
@@ -159,11 +198,12 @@ public class CityActivity extends Activity implements OnClickListener{
 		 // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
 		 oks.setTitle(getString(R.string.share));
 		 // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
-		 oks.setTitleUrl("http://sharesdk.cn");
+		 oks.setTitleUrl("http://www.baidu.com");
 		 // text是分享文本，所有平台都需要这个字段
-		 oks.setText("我是分享文本");
+		 oks.setText("这是分享文本，带代码中写死了");
 		 // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
-		 oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
+//		 oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
+		 oks.setImagePath("/sdcard"+FILE_NAME);//确保SDcard下面存在此张图片
 		 // url仅在微信（包括好友和朋友圈）中使用
 		 oks.setUrl("http://sharesdk.cn");
 		 // comment是我对这条分享的评论，仅在人人网和QQ空间使用
@@ -172,7 +212,7 @@ public class CityActivity extends Activity implements OnClickListener{
 		 oks.setSite(getString(R.string.app_name));
 		 // siteUrl是分享此内容的网站地址，仅在QQ空间使用
 		 oks.setSiteUrl("http://sharesdk.cn");
-
+		 
 		// 启动分享GUI
 		 oks.show(this);
 	}
@@ -287,5 +327,29 @@ public class CityActivity extends Activity implements OnClickListener{
 		return view;
 	}
 
+	//把图片从drawable复制到sdcard中
+	//copy the picture from the drawable to sdcard
+	private void initImagePath() {
+		try {
+			if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
+					&& Environment.getExternalStorageDirectory().exists()) {
+				TEST_IMAGE = Environment.getExternalStorageDirectory().getAbsolutePath() + FILE_NAME;
+			} else {
+				TEST_IMAGE = getApplication().getFilesDir().getAbsolutePath() + FILE_NAME;
+			}
+			File file = new File(TEST_IMAGE);
+			if (!file.exists()) {
+				file.createNewFile();
+				Bitmap pic = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+				FileOutputStream fos = new FileOutputStream(file);
+				pic.compress(CompressFormat.JPEG, 100, fos);
+				fos.flush();
+				fos.close();
+			}
+		} catch (Throwable t) {
+			t.printStackTrace();
+			TEST_IMAGE = null;
+		}
+	}
 
 }

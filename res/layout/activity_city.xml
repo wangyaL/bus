@@ -83,4 +83,21 @@
         android:layout_toRightOf="@+id/btn_share"
         android:text="分享" />
 
+    <Button
+        android:id="@+id/btn_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btn_share2"
+        android:layout_alignBottom="@+id/btn_share2"
+        android:layout_toRightOf="@+id/btn_share2"
+        android:text="图片放大" />
+
+    <Button
+        android:id="@+id/btn_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btn_share"
+        android:layout_below="@+id/btn_share"
+        android:text="Button" />
+
 </RelativeLayout>
