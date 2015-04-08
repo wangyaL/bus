@@ -53,9 +53,8 @@ public class PictureViewFra extends Activity {
         gallery = (PicGallery) findViewById(R.id.pic_gallery);
         gallery.setVerticalFadingEdgeEnabled(false);// 取消竖直渐变边框
         gallery.setHorizontalFadingEdgeEnabled(false);// 取消水平渐变边框
-        gallery.setDetector(new GestureDetector(this,
-                new MySimpleGesture()));
-        mAdapter = new GalleryAdapter(this,helpTopicImage,position);
+        gallery.setDetector(new GestureDetector(this, new MySimpleGesture()));
+        mAdapter = new GalleryAdapter(this, helpTopicImage, position);
         gallery.setAdapter(mAdapter);
         gallery.setOnItemLongClickListener(new OnItemLongClickListener() {
             @Override

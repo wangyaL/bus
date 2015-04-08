@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -22,6 +23,7 @@ import android.widget.Gallery.LayoutParams;
  * @date 2015年3月13日 上午10:59:00
  */
 public class GalleryAdapter extends BaseAdapter {
+	private final String TAG = "==GalleryAdapter==";
 
 	private Context context;
 
@@ -50,12 +52,13 @@ public class GalleryAdapter extends BaseAdapter {
 		notifyDataSetChanged();
 	}
 
-	public GalleryAdapter(Context context,ArrayList<HelpTopicImageBean>   helpTopicImage,int position) {
+	public GalleryAdapter(Context context, ArrayList<HelpTopicImageBean> helpTopicImage, int position) {
 		this.context = context;
         this.helpTopicImage = helpTopicImage;
         this.position = position;
         for(int i=0; i<helpTopicImage.size(); i++){
         	String url = helpTopicImage.get(i).getImgUrl();
+        	Log.d(TAG, i+"===="+url);
         	//TODO 空指针
             Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url);
             bitmaps.add(bitmap);

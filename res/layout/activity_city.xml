@@ -98,6 +98,6 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/btn_share"
         android:layout_below="@+id/btn_share"
-        android:text="Button" />
+        android:text="图片" />
 
 </RelativeLayout>

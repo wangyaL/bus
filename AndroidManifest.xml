@@ -58,7 +58,7 @@
         </activity>
         
         <!-- share sdk start -->
-        <activity
+   <!--      <activity
 		    android:name="cn.sharesdk.framework.ShareSDKUIShell"
 		    android:configChanges="keyboardHidden|orientation|screenSize"
 		    android:screenOrientation="portrait"
@@ -72,7 +72,7 @@
 		        <category android:name="android.intent.category.BROWSABLE" />
 		        <category android:name="android.intent.category.DEFAULT" />
 		    </intent-filter>
-		</activity>
+		</activity> -->
 		<!-- 微信分享回调 -->
         <!-- <activity
             android:name=".wxapi.WXEntryActivity"
